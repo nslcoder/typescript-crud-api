@@ -1,8 +1,13 @@
+import 'dotenv/config';
 import express, { Request, Response, Application } from 'express';
 import { router } from './routes/index';
+import { connectDB } from './config/db';
+
 const app: Application = express();
 
-const port: number = Number(process.env.PORT) || 5000;
+const port: string | number = process.env.PORT || 5000;
+
+connectDB();
 
 app.use(express.json());
 app.use('/api/posts', router);
